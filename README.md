@@ -9,13 +9,13 @@ Custom Google search places autocomplete widget for all platform.
 
 ### Add dependency
 
-You can use the command to add dio as a dependency with the latest stable version:
+You can use the command to add google_search_place as a dependency with the latest stable version:
 
 ```console
 $ dart pub add google_search_place
 ```
 
-Or you can manually add dio into the dependencies section in your pubspec.yaml:
+Or you can manually add google_search_place into the dependencies section in your pubspec.yaml:
 
 ```yaml
 dependencies:

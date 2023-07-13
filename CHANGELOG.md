@@ -9,3 +9,6 @@
 
 ## 0.0.2
 * Get Place detail
+
+## 0.0.3
+* Update README.md
