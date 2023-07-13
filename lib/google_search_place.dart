@@ -45,18 +45,17 @@ class SearchPlaceAutoCompletedTextField extends StatefulWidget {
 
 class _SearchPlaceAutoCompletedTextFieldState
     extends State<SearchPlaceAutoCompletedTextField> {
-  final subject = PublishSubject<String>();
+  final _subject = PublishSubject<String>();
   OverlayEntry? _overlayEntry;
-  List<Prediction> alPredictions = [];
+  final List<Prediction> _alPredictions = [];
 
   final LayerLink _layerLink = LayerLink();
-  bool isSearched = false;
 
   @override
   void initState() {
     super.initState();
 
-    subject.stream
+    _subject.stream
         .distinct()
         .debounceTime(Duration(milliseconds: widget.debounceTime))
         .listen(_textChanged);
@@ -71,7 +70,7 @@ class _SearchPlaceAutoCompletedTextFieldState
         decoration: widget.inputDecoration,
         style: widget.textStyle,
         controller: widget.controller,
-        onChanged: (string) => (subject.add(string)),
+        onChanged: (string) => (_subject.add(string)),
         validator: widget.validator,
         focusNode: widget.focusNode,
       ),
@@ -98,15 +97,14 @@ class _SearchPlaceAutoCompletedTextFieldState
         PlacesAutocompleteResponse.fromJson(response.data);
 
     if (text.isEmpty) {
-      alPredictions.clear();
+      _alPredictions.clear();
       _overlayEntry?.remove();
       return;
     }
 
-    isSearched = false;
     if (subscriptionResponse.predictions!.isNotEmpty) {
-      alPredictions.clear();
-      alPredictions.addAll(subscriptionResponse.predictions!);
+      _alPredictions.clear();
+      _alPredictions.addAll(subscriptionResponse.predictions!);
     }
 
     _overlayEntry = null;
@@ -139,16 +137,16 @@ class _SearchPlaceAutoCompletedTextFieldState
                       child: ListView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
-                        itemCount: alPredictions.length,
+                        itemCount: _alPredictions.length,
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: () {
-                              if (index < alPredictions.length) {
-                                widget.itmOnTap(alPredictions[index]);
+                              if (index < _alPredictions.length) {
+                                widget.itmOnTap(_alPredictions[index]);
                                 if (!widget.isLatLngRequired) return;
 
                                 _getPlaceDetailsFromPlaceId(
-                                    alPredictions[index]);
+                                    _alPredictions[index]);
 
                                 _removeOverlay();
                               }
@@ -156,7 +154,7 @@ class _SearchPlaceAutoCompletedTextFieldState
                             child: Container(
                                 padding: const EdgeInsets.all(10),
                                 child: Text(
-                                  alPredictions[index].description ?? "",
+                                  _alPredictions[index].description ?? "",
                                   style: widget.itemTextStyle,
                                 )),
                           );
@@ -169,7 +167,7 @@ class _SearchPlaceAutoCompletedTextFieldState
   }
 
   _removeOverlay() {
-    alPredictions.clear();
+    _alPredictions.clear();
     _overlayEntry = _createOverlayEntry();
     Overlay.of(context).insert(_overlayEntry!);
     _overlayEntry?.markNeedsBuild();
