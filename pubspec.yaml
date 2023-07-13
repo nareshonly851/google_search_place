@@ -1,7 +1,7 @@
 name: google_search_place
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+homepage: https://github.com/nareshonly851/google_search_place
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
