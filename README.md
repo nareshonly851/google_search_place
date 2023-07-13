@@ -56,7 +56,4 @@ final TextEditingController _searchPlaceController = TextEditingController();
 ## Customization Option
 
 You can customize a text field input decoration and debounce time
-
-## Screenshots
-
-<img src="https://github.com/nareshonly851/google_search_place/blob/main/screenshots/sample.png" height="400">
+ 
