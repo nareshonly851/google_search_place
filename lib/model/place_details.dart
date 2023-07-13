@@ -147,7 +147,7 @@ class Geometry {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (location != null) {
       data['location'] = location!.toJson();
     }
@@ -191,7 +191,7 @@ class Viewport {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (northeast != null) {
       data['northeast'] = northeast!.toJson();
     }

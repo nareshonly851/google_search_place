@@ -108,7 +108,7 @@ class MatchedSubstrings {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['length'] = length;
     data['offset'] = offset;
     return data;
@@ -148,9 +148,9 @@ class Terms {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['offset'] = this.offset;
-    data['value'] = this.value;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['offset'] = offset;
+    data['value'] = value;
     return data;
   }
 }

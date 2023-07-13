@@ -1,7 +1,6 @@
 library google_search_place;
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_search_place/model/place_details.dart';
 import 'package:google_search_place/model/prediction.dart';
