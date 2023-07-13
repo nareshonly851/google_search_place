@@ -1,6 +1,6 @@
 name: google_search_place
-description: Custom Google search places autocomplete widget for Android and iOS both. Use https://pub.dev/packages/google_search_place
-version: 0.0.2
+description: Custom Google search places autocomplete widget for all platform. Use https://pub.dev/packages/google_search_place
+version: 0.0.3
 homepage: https://github.com/nareshonly851/google_search_place
 
 environment:
