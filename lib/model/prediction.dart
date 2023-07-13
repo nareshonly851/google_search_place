@@ -1,3 +1,5 @@
+import 'package:google_search_place/model/place_details.dart';
+
 class PlacesAutocompleteResponse {
   List<Prediction>? predictions;
   String? status;
@@ -35,6 +37,7 @@ class Prediction {
   List<String>? types;
   String? lat;
   String? lng;
+  PlaceDetails? placeDetails;
 
   Prediction({this.description,
     this.id,

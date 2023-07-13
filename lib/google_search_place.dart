@@ -50,6 +50,8 @@ class _SearchPlaceAutoCompletedTextFieldState
 
   final LayerLink _layerLink = LayerLink();
 
+  final Dio _dio = Dio();
+
   @override
   void initState() {
     super.initState();
@@ -77,7 +79,6 @@ class _SearchPlaceAutoCompletedTextFieldState
   }
 
   _getLocation(String text) async {
-    Dio dio = Dio();
     String url =
         "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}";
 
@@ -91,7 +92,7 @@ class _SearchPlaceAutoCompletedTextFieldState
       }
     }
 
-    Response response = await dio.get(url);
+    Response response = await _dio.get(url);
     PlacesAutocompleteResponse subscriptionResponse =
         PlacesAutocompleteResponse.fromJson(response.data);
 
@@ -172,10 +173,10 @@ class _SearchPlaceAutoCompletedTextFieldState
     _overlayEntry?.markNeedsBuild();
   }
 
-  Future<Response?> _getPlaceDetailsFromPlaceId(Prediction prediction) async {
+  _getPlaceDetailsFromPlaceId(Prediction prediction) async {
     var url =
         "https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}";
-    Response response = await Dio().get(
+    Response response = await _dio.get(
       url,
     );
 
@@ -184,8 +185,8 @@ class _SearchPlaceAutoCompletedTextFieldState
     prediction.lat = placeDetails.result!.geometry!.location!.lat.toString();
     prediction.lng = placeDetails.result!.geometry!.location!.lng.toString();
 
+    prediction.placeDetails = placeDetails;
     widget.getPlaceDetailWithLatLng!(prediction);
-    return null;
   }
 }
 
